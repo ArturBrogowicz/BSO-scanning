@@ -20,7 +20,7 @@ fi
 apt update
 apt install -y wireguard
 apt install -y resolvconf
-# 📁 Konfiguracja
+#Konfiguracja
 mkdir -p /etc/wireguard
 
 cat > /etc/wireguard/wg0.conf <<EOF
@@ -38,31 +38,31 @@ EOF
 
 chmod 600 /etc/wireguard/wg0.conf
 
-# 🚀 Uruchomienie VPN
+#Uruchomienie VPN
 wg-quick up wg0
 
-echo "✅ VPN uruchomiony. Sprawdź: ip a lub ping 10.0.0.1"
+echo "VPN uruchomiony. Sprawdz: ip a lub ping 10.0.0.1"
 
-# 🐍 Tworzenie środowiska Python i uruchamianie skanera
-echo "📦 Przygotowanie środowiska Python..."
+#Tworzenie środowiska Python i uruchamianie skanera
+echo "Przygotowanie srodowiska Python..."
 
 SCRIPT_NAME="skan.py"
 
-# Instalacja zależności
+#Instalacja zależności
 apt install -y python3-venv python3-pip
 
-# Tworzenie i aktywacja środowiska venv
+#Tworzenie i aktywacja środowiska venv
 python3 -m venv .venv
 source .venv/bin/activate
 
-# Instalacja wymaganych paczek
+#Instalacja wymaganych paczek
 pip install --upgrade pip
 pip install python-gvm netifaces lxml
 
-# Uruchomienie skryptu
-echo "🚀 Uruchamiam skrypt skanowania..."
+#Uruchomienie skryptu
+echo "Uruchamiam skrypt skanowania..."
 python3 "$SCRIPT_NAME"
 
-# Dezaktywacja środowiska
+#Dezaktywacja środowiska
 deactivate
 wg-quick down wg0
