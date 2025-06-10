@@ -200,12 +200,6 @@ def create_and_start_scan(gmp, target_ip):
         configs_raw = gmp.get_scan_configs()
         configs = etree.fromstring(configs_raw)
 
-        for c in configs.xpath("config"):
-            name = c.findtext("name")
-            cid = c.get("id")
-            print(f"Config: {name} ({cid})")
-
-
         full_fast = next(
             (c for c in configs.xpath("config") if c.findtext("name") == "Full and fast"),
             None
